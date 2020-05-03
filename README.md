@@ -1,10 +1,10 @@
 # javascript-challenge
 
-Code to create a dynamic table based on information on UFO sightings! Website uses JavaScript, HTML, CSS, and D3.js to create a table that can be filtered by date/time by users.
+Code to create a dynamic table based on information on UFO sightings! Website uses JavaScript, HTML, CSS, and D3.js to create a table that can be filtered by date by users. Available date range is 1/1/2010 to 1/13/2010.
 
 Data columns displayed:
 
--Date/Time
+-Date
 
 -City
 
@@ -14,6 +14,8 @@ Data columns displayed:
 
 -Shape
 
--Comment
+-Duration
+
+-Comments
 
 Direct link to website:
