@@ -1,6 +1,6 @@
 // from data.js
 var tableData = data;
-console.log(tableData);
+// console.log(tableData);
 
 // Get a reference to the table body
 var tbody = d3.select("tbody");
@@ -37,24 +37,40 @@ function runEnter() {
     // Get the value property of the input element
     var inputValue = inputElement.property("value");
   
-    console.log(inputValue);
+    console.log(`Input value: ${inputValue}`);
 
     // Set start and end dates for input selection
-    var startDate = '1/1/2010';
-    var endDate = '1/13/2010';
+    var availableDates = [
+        '1/1/2010',
+        '1/2/2010',
+        '1/3/2010',
+        '1/4/2010',
+        '1/5/2010',
+        '1/6/2010',
+        '1/7/2010',
+        '1/8/2010',
+        '1/9/2010',
+        '1/10/2010',
+        '1/11/2010',
+        '1/12/2010',
+        '1/13/2010',
+    ];
 
-    if((inputValue >= startDate) && (inputValue <= endDate)) {
+    var test = availableDates.includes(inputValue);
+
+    if(test) {
         filteredData = tableData.filter(ufodate => ufodate.datetime === inputValue);}
     else{alert("Please enter a date within the range 1/1/2010 to 1/13/2010");}
     
-        console.log(filteredData);
+        console.log(`Filtered Data: ${filteredData}`);
 
         createTable(filteredData);
 }
 
 // Create event handlers 
-d3.select("#filter-btn").on("change", runEnter);
-d3.selectAll("#datetime").on("change", runEnter);
+var form = d3.select(".form-control");
+d3.select("#filter-btn").on("click", runEnter);
+form.on("submit", runEnter);
 
 // Display full table of data
 createTable(tableData);
