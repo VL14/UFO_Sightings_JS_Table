@@ -68,9 +68,8 @@ function runEnter() {
 }
 
 // Create event handlers 
-var form = d3.select(".form-control");
 d3.select("#filter-btn").on("click", runEnter);
-form.on("submit", runEnter);
+d3.select(".form-control").on("submit", runEnter);
 
 // Display full table of data
 createTable(tableData);
