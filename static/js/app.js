@@ -19,11 +19,32 @@ function createTable(ufodata) {
         });
     });}
 
+// Create event handlers for date filter 
+var form = d3.select("#datetime");
+form.on("submit", runEnter);
+
+d3.select("#filter-btn").on("click", runEnter);
+
+// Loop through data and populate states array for dropdown
+var states = tableData.map(row => row.state);
+let statesUnique = Array.from(new Set(states)).sort();
+//let statesArray = statesUnique.sort()
+console.log(statesUnique);
+
+// Push unique state values to dropdown menu
+var dropdownMenu = d3.select("#selDataset");
+
+statesUnique.forEach((state) => {
+    var value = dropdownMenu.append("option")
+    value.text(state);
+});
+
+
 // Complete the event handler function for the form
 function runEnter() {
-
+    // DATE FILTER
     // Check that function is working
-    console.log("Function is running");
+    console.log("Date filter is running");
 
     // Create new variable for filtered data
     var filteredData=tableData;
@@ -63,13 +84,24 @@ function runEnter() {
     else{alert("Please enter a date within the range 1/1/2010 to 1/13/2010");}
     
         console.log(`Filtered Data: ${filteredData}`);
+        
+        
 
-        createTable(filteredData);
-}
+    // STATE FILTER
+    // Set up event listener for state filter
+    //d3.selectAll("#selDataset").on("change", stateFilter);
 
-// Create event handlers 
-d3.select("#filter-btn").on("click", runEnter);
-d3.select(".form-control").on("submit", runEnter);
+    // Select the input from the dropdown menu
+    var dropdownMenu = d3.select("#selDataset");
+    var stateSelection = dropdownMenu.property("value");
+    console.log(`State chosen: ${stateSelection}`);
+
+    if(stateSelection) {
+        filteredStateData = filteredData.filter(state => state.state === stateSelection);
+        createTable(filteredStateData);}
+    else {createTable(filteredData);}
+
+    }
 
 // Display full table of data
 createTable(tableData);
